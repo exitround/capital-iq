@@ -14,6 +14,16 @@ module CapitalIQ
       raise CapitalIQ::APIError, response['ErrMsg'] if response['ErrMsg']
       response
     end
-
+    
+    def gdst_request(identifier, mnemonic)
+      response = request('GDST', identifier, mnemonic, {PERIODTYPE: "IQ_FQ"})
+      response['Rows'].first['Row'].first
+    end
+    
+    def quick_match(identifier)
+      response = request('GDSHE', 'exitround', 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:"1", endRank:"5"})
+      response['Rows'].first['Row'].first
+    end
+    
   end
 end
