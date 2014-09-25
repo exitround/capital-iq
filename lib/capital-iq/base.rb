@@ -20,10 +20,48 @@ module CapitalIQ
       response['Rows'].first['Row'].first
     end
     
-    def quick_match(identifier)
-      response = request('GDSHE', 'exitround', 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:"1", endRank:"5"})
+    def quick_match(name)
+      response = request('GDSHE', name, 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:"1", endRank:"5"})
       response['Rows'].first['Row'].first
     end
     
+    def match_and_request(name, mnemonic)
+      identifier = quick_match(name)
+      response = request('GDSP', identifier, mnemonic, nil)
+      response['Rows'].first['Row'].first
+    end
+    
+    def transaction_list(name)
+      acquisitions = {}
+      identifier = quick_match(name)
+      transaction_list = request('GDSHE', identifier, 'IQ_TRANSACTION_LIST_MA', {startRank:"1", endRank:"20"})
+      transaction_items = ['IQ_TR_TARGET_ID', 'IQ_TR_BUYER_ID', 'IQ_TR_SELLER_ID', 'IQ_TR_STATUS']
+      return nil if transaction_list['Rows'].first["Row"].first == 'Data Unavailable'
+      transaction_list['Rows'].each do |transaction|
+        acquisitions[transaction['Row'].first] = transaction_items.map {|transaction_item|
+          Hash[transaction_item, request('GDSP', transaction['Row'].first, transaction_item, nil)['Rows'].map {|a|
+            next if a['Row'].first == 'Data Unavailable'
+            if a['Row'].first.include?(',')
+              a['Row'].first.split(', ')
+            else
+              a['Row'].first
+            end
+            }.first
+          ]
+        }.reduce({}, :merge)
+      end
+      acquisitions  
+    end
+  end
+  
+  class Transaction
+    
   end
 end
+
+# Multiple datapoints in request, support in request class/method
+
+# CapIQ IDs in Org table
+
+# Sellers in Organization table?
+
