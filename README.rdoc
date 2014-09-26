@@ -1,6 +1,21 @@
 = capital-iq
 
-Description goes here.
+Ruby API wrapper to Capital IQ API.
+
+== Usage
+
+  client = CapitalIQ::Base.new('user@host.com', 'sfd98j429ds')
+  => #<CapitalIQ::Base:0x007fd81d41ac38 @auth={:username=>"user@host.com", :password=>"sfd98j429ds"}>
+  
+  client.quick_match('exitround')
+  => "IQ231729634"
+  
+  client.gdsp_request('IQ231729634', 'IQ_CITY')
+  => "San Francisco" 
+  
+  
+  
+  
 
 == Contributing to capital-iq
  
@@ -14,6 +29,6 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2014 Ian Morgan. See LICENSE.txt for
+Copyright (c) 2014 Exitround. See LICENSE.txt for
 further details.
 

@@ -20,6 +20,11 @@ module CapitalIQ
       response['Rows'].first['Row'].first
     end
     
+    def gdsp_request(identifier, mnemonic)
+      response = request('GDSP', identifier, mnemonic, nil)
+      response['Rows'].first['Row'].first
+    end
+    
     def quick_match(name)
       response = request('GDSHE', name, 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:"1", endRank:"5"})
       response['Rows'].first['Row'].first
@@ -27,7 +32,7 @@ module CapitalIQ
     
     def match_and_request(name, mnemonic)
       identifier = quick_match(name)
-      response = request('GDSP', identifier, mnemonic, nil)
+      response = gdsp_request(identifier, mnemonic)
       response['Rows'].first['Row'].first
     end
     
