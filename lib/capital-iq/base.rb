@@ -25,15 +25,18 @@ module CapitalIQ
       response['Rows'].first['Row'].first
     end
     
-    def quick_match(name)
-      response = request('GDSHE', name, 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:"1", endRank:"5"})
+    def gdshe_request(identifier, mnemonic, properties)
+      response = request('GDSHE', identifier, mnemonic, properties)
       response['Rows'].first['Row'].first
+    end
+    
+    def quick_match(name)
+      gdshe_request(name, 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:"1", endRank:"5"})
     end
     
     def match_and_request(name, mnemonic)
       identifier = quick_match(name)
-      response = gdsp_request(identifier, mnemonic)
-      response['Rows'].first['Row'].first
+      gdsp_request(identifier, mnemonic)
     end
     
     def transaction_list(name)
@@ -59,14 +62,5 @@ module CapitalIQ
     end
   end
   
-  class Transaction
-    
-  end
 end
-
-# Multiple datapoints in request, support in request class/method
-
-# CapIQ IDs in Org table
-
-# Sellers in Organization table?
 

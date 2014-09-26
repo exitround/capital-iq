@@ -2,6 +2,12 @@
 
 Ruby API wrapper to Capital IQ API.
 
+
+== Installation
+
+  gem install capital-iq
+  
+
 == Usage
 
   client = CapitalIQ::Base.new('user@host.com', 'sfd98j429ds')
@@ -12,9 +18,6 @@ Ruby API wrapper to Capital IQ API.
   
   client.gdsp_request('IQ231729634', 'IQ_CITY')
   => "San Francisco" 
-  
-  
-  
   
 
 == Contributing to capital-iq
