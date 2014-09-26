@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "capital-iq"
   gem.homepage = "http://github.com/seeingidog/capital-iq"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Ruby wrapper for the CapIQ API}
+  gem.description = %Q{Ruby wrapper for the CapIQ API}
   gem.email = "ian@ruby-code.com"
   gem.authors = ["Ian Morgan"]
   # dependencies defined in Gemfile
