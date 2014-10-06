@@ -41,9 +41,19 @@ module CapitalIQ
     end
 
     def transaction_list(identifier)
+      transaction_items = ['IQ_TR_TARGET_ID', 'IQ_TR_BUYER_ID', 'IQ_TR_SELLER_ID', 'IQ_TR_STATUS', 'IQ_TR_CLOSED_DATE', 'IQ_TR_IMPLIED_EV_FINAL']
+      walk_transactions(identifier, transaction_items)
+    end
+
+    def pe_transactions(identifier)
+      transaction_items = ['IQ_COMPANY_NAME']
+      walk_transactions(identifier, transaction_items)
+    end
+
+    private
+     def walk_transactions(identifier, transaction_items)
       acquisitions = {}
       transaction_list = request('GDSHE', identifier, 'IQ_TRANSACTION_LIST_MA', {startRank:"1", endRank:"20"})
-      transaction_items = ['IQ_TR_TARGET_ID', 'IQ_TR_BUYER_ID', 'IQ_TR_SELLER_ID', 'IQ_TR_STATUS', 'IQ_TR_CLOSED_DATE', 'IQ_TR_IMPLIED_EV_FINAL']
       return nil if transaction_list['Rows'].first["Row"].first == 'Data Unavailable'
       transaction_list['Rows'].each do |transaction|
         acquisitions[transaction['Row'].first] = transaction_items.map {|transaction_item|
@@ -59,7 +69,8 @@ module CapitalIQ
         }.reduce({}, :merge)
       end
       acquisitions
-    end
-  end
 
+     end
+
+  end
 end
