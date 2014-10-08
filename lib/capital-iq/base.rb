@@ -12,7 +12,7 @@ module CapitalIQ
       request_body = Request.new(function, identifier, mnemonic, properties).request
       response_data = self.class.post(ENDPOINT, body: request_body, basic_auth: @auth, ssl_version: :SSLv3).parsed_response
       response = response_data[response_data.keys.first]
-      return nil if response.nil?
+      raise CapitalIQ::APIError if response == "Error Processing the Request"
       raise CapitalIQ::APIError, response.first['ErrMsg'] if response.first['ErrMsg']
       response.first
     end
