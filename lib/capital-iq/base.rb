@@ -11,9 +11,10 @@ module CapitalIQ
     def request(function, identifier, mnemonic, properties)
       request_body = Request.new(function, identifier, mnemonic, properties).request
       response_data = self.class.post(ENDPOINT, body: request_body, basic_auth: @auth, ssl_version: :SSLv3).parsed_response
-      response = response_data[response_data.keys.first].first
+      response = response_data[response_data.keys.first]
+      return nil if response.nil?
       raise CapitalIQ::APIError, response['ErrMsg'] if response['ErrMsg']
-      response
+      response.first
     end
 
     def gdst_request(identifier, mnemonic)
@@ -42,18 +43,18 @@ module CapitalIQ
 
     def transaction_list(identifier)
       transaction_items = ['IQ_TR_TARGET_ID', 'IQ_TR_BUYER_ID', 'IQ_TR_SELLER_ID', 'IQ_TR_STATUS', 'IQ_TR_CLOSED_DATE', 'IQ_TR_IMPLIED_EV_FINAL']
-      walk_transactions(identifier, transaction_items)
+      walk_transactions(identifier, 'IQ_TRANSACTION_LIST_MA', transaction_items)
     end
 
     def pe_transactions(identifier)
-      transaction_items = ['IQ_COMPANY_NAME']
-      walk_transactions(identifier, transaction_items)
+      transaction_items = ['IQ_PRIMARY_SIC_CODE', 'IQ_EMPLOYEES']
+      walk_transactions(identifier, 'IQ_INVESTMENTS_ALL_ID', transaction_items)
     end
 
     private
-     def walk_transactions(identifier, transaction_items)
+     def walk_transactions(identifier, list_identifier, transaction_items)
       acquisitions = {}
-      transaction_list = request('GDSHE', identifier, 'IQ_TRANSACTION_LIST_MA', {startRank:"1", endRank:"20"})
+      transaction_list = request('GDSHE', identifier, list_identifier, {startRank:"1", endRank:"20"})
       return nil if transaction_list['Rows'].first["Row"].first == 'Data Unavailable'
       transaction_list['Rows'].each do |transaction|
         acquisitions[transaction['Row'].first] = transaction_items.map {|transaction_item|
@@ -64,7 +65,7 @@ module CapitalIQ
             else
               a['Row'].first
             end
-            }.first
+            }.first 
           ]
         }.reduce({}, :merge)
       end
