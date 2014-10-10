@@ -42,7 +42,7 @@ module CapitalIQ
     end
 
     def transaction_list(identifier)
-      transaction_items = ['IQ_TR_TARGET_ID', 'IQ_TR_BUYER_ID', 'IQ_TR_SELLER_ID', 'IQ_TR_STATUS', 'IQ_TR_CLOSED_DATE', 'IQ_TR_IMPLIED_EV_FINAL']
+      transaction_items = ['IQ_TR_CURRENCY', 'IQ_TR_TARGET_ID', 'IQ_TR_BUYER_ID', 'IQ_TR_SELLER_ID', 'IQ_TR_STATUS', 'IQ_TR_CLOSED_DATE', 'IQ_TR_IMPLIED_EV_FINAL']
       walk_transactions(identifier, 'IQ_TRANSACTION_LIST_MA', transaction_items)
     end
 
