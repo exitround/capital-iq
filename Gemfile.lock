@@ -98,9 +98,9 @@ DEPENDENCIES
   guard-rspec
   hashie
   httparty
-  jeweler (~> 1.8.3)
+  jeweler
   json
-  rdoc (~> 3.12)
-  rspec (~> 2.8.0)
+  rdoc
+  rspec
   vcr
   webmock

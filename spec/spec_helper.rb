@@ -14,7 +14,7 @@ RSpec.configure do |config|
 end
 
 WebMock.disable_net_connect!
-WebMock.stub_request(:post. "https://sdk.gds.standardandpoors.com/gdssdk/rest/v2/clientservice.json").to_return(:status => 200, :body => File.new(File.dirname(__FILE__) + '/responses/capiq_ibm.json'), :headers => {})
+WebMock.stub_request(:post, "https://sdk.gds.standardandpoors.com/gdssdk/rest/v2/clientservice.json").to_return(:status => 200, :body => File.new(File.dirname(__FILE__) + '/responses/capiq_ibm.json'), :headers => {})
 
 VCR.config do |c|
   c.cassette_library_dir = 'spec/fixtures/dish_cassettes'

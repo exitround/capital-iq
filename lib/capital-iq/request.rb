@@ -1,14 +1,24 @@
 module CapitalIQ
   class Request
-    attr_reader :request
-    
-    def initialize(function, identifier, mnemonic, properties)
-      request_hash =  {inputRequests:[
-        {function:function, identifier: identifier, mnemonic: mnemonic}
-      ]}
-      request_hash.merge!({properties: properties}) if properties
-      @request = "inputRequests=" + request_hash.to_json
+    attr_reader :function, :identifier, :mnemonic, :properties
+
+    def initialize(function, identifier, mnemonic, properties = nil)
+      @function = function
+      @identifier = identifier
+      @mnemonic = mnemonic
+      @properties = properties
+
+      @hash = {
+          function: self.function,
+          identifier: self.identifier,
+          mnemonic: self.mnemonic
+      }
+      @hash[:properties] = properties unless properties.nil?
     end
-    
+
+    def to_hash
+      @hash
+    end
+
   end
 end
