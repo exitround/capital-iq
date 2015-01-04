@@ -1,4 +1,3 @@
-require 'set'
 module CapitalIQ
   class Client
     ENDPOINT = 'https://sdk.gds.standardandpoors.com/gdssdk/rest/v2/clientservice.json'
@@ -47,7 +46,7 @@ module CapitalIQ
         IQ_TR_CURRENCY IQ_TR_TARGET_ID IQ_TR_BUYER_ID IQ_TR_SELLER_ID
         IQ_TR_STATUS IQ_TR_CLOSED_DATE IQ_TR_IMPLIED_EV_FINAL
     )
-    DEFAULT_MA_PROPERTIES = {startRank:"1", endRank:"10"}
+    DEFAULT_MA_PROPERTIES = {StartRank:"1", EndRank:"10"}
 
     def ma_transactions(identifier, mnemonics=DEFAULT_MA_MNEMONICS, properties=DEFAULT_MA_PROPERTIES)
       transaction_ids = self.request_gdshe(identifier, 'IQ_TRANSACTION_LIST_MA', properties)

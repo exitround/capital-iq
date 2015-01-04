@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module CapitalIQ
   class RequestResult < OpenStruct
     def initialize(raw_result)

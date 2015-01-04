@@ -5,7 +5,7 @@ module CapitalIQ
       @header_map = {}
       @response_data = response_data
       raw_results = response_data["GDSSDKResponse"]
-      return if raw_results.class != Array
+      return if !raw_results.is_a?(Array)
 
       # create wrappers for each response
       @results = raw_results.collect { |r| RequestResult.new(r) }
