@@ -59,4 +59,7 @@ module CapitalIQ
       result
     end
   end
+
+  # b/w compatibility with 0.07
+  Base = Client
 end
