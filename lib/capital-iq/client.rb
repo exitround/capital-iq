@@ -23,9 +23,13 @@ module CapitalIQ
       response
     end
 
-    def request(function, identifier, mnemonics, properties=nil)
-      mnemonics = [mnemonics] unless mnemonics.class == Array
-      requests = mnemonics.collect {|m| CapitalIQ::Request.new(function, identifier, m, properties)}
+    def request(function, identifiers, mnemonics, properties=nil)
+      mnemonics = [mnemonics] unless mnemonics.is_a? Enumerable
+      identifiers = [identifiers] unless identifiers.is_a? Enumerable
+      requests = []
+      identifiers.each do |identifier|
+        requests.unshift(*mnemonics.collect {|m| CapitalIQ::Request.new(function, identifier, m, properties)})
+      end
       base_request(requests)
     end
 
@@ -41,25 +45,9 @@ module CapitalIQ
         super
       end
     end
-
-    DEFAULT_MA_MNEMONICS = %w(
-        IQ_TR_CURRENCY IQ_TR_TARGET_ID IQ_TR_BUYER_ID IQ_TR_SELLER_ID
-        IQ_TR_STATUS IQ_TR_CLOSED_DATE IQ_TR_IMPLIED_EV_FINAL
-    )
-    DEFAULT_MA_PROPERTIES = {StartRank:"1", EndRank:"10"}
-
-    def ma_transactions(identifier, mnemonics=DEFAULT_MA_MNEMONICS, properties=DEFAULT_MA_PROPERTIES)
-      transaction_ids = self.request_gdshe(identifier, 'IQ_TRANSACTION_LIST_MA', properties)
-      transaction_ids = transaction_ids['IQ_TRANSACTION_LIST_MA']
-      result = {}
-      transaction_ids.each do |tid|
-        res = self.request_gdsp(tid, mnemonics)
-        result[tid] = res.to_hash
-      end
-      result
-    end
   end
 
   # b/w compatibility with 0.07
+
   Base = Client
 end
