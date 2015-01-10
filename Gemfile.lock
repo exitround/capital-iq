@@ -72,6 +72,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.1.0)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
       rspec-expectations (~> 2.8.0)
@@ -101,6 +102,7 @@ DEPENDENCIES
   jeweler
   json
   rdoc
+  redis
   rspec
   vcr
   webmock

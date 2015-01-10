@@ -10,6 +10,7 @@ group :development do
   gem 'guard-rspec'
   gem 'webmock'
   gem 'vcr'
+  gem 'redis'
 end
 
 gem 'httparty'
