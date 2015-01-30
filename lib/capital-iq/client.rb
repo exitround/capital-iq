@@ -15,7 +15,7 @@ module CapitalIQ
       # build request
       requests = [requests] unless requests.class == Array
       request_array = requests.collect { |r| r.to_hash }
-      request_body = "inputRequests=#{ {inputRequests: request_array}.to_json }"
+      request_body = {inputRequests: {inputRequests: request_array}.to_json}
 
       # send request
       response_data = from_cache(request_body) || self.class.post(
@@ -67,7 +67,7 @@ module CapitalIQ
     end
 
     def cache_key(request_body)
-      Digest::MD5.hexdigest(request_body)
+      Digest::MD5.hexdigest(request_body.to_s)
     end
 
   end
