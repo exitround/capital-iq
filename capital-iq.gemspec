@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
-  s.authors = ["Ian Morgan"]
+  s.authors = ["Val Savvateev", "Greg Dean"]
   s.date = "2015-01-30"
   s.description = "Ruby wrapper for the CapIQ API"
-  s.email = "ian@ruby-code.com"
+  s.email = "dev@exitround.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
     "spec/responses/capiq_ibm.json",
     "spec/spec_helper.rb"
   ]
-  s.homepage = "http://github.com/seeingidog/capital-iq"
+  s.homepage = "http://github.com/exitround/capital-iq"
   s.licenses = ["MIT"]
   s.rubygems_version = "2.4.5"
   s.summary = "Ruby wrapper for the CapIQ API"
