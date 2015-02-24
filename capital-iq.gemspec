@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Val Savvateev", "Greg Dean"]
-  s.date = "2015-01-30"
+  s.date = "2015-02-24"
   s.description = "Ruby wrapper for the CapIQ API"
   s.email = "dev@exitround.com"
   s.extra_rdoc_files = [
@@ -35,10 +35,7 @@ Gem::Specification.new do |s|
     "lib/capital-iq/functions.rb",
     "lib/capital-iq/request.rb",
     "lib/capital-iq/request_result.rb",
-    "spec/capital-iq_spec.rb",
-    "spec/request_spec.rb",
-    "spec/responses/capiq_ibm.json",
-    "spec/spec_helper.rb"
+    "spec/capital-iq_spec.rb"
   ]
   s.homepage = "http://github.com/exitround/capital-iq"
   s.licenses = ["MIT"]
@@ -59,6 +56,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<guard>, [">= 0"])
       s.add_development_dependency(%q<guard-rspec>, [">= 0"])
       s.add_development_dependency(%q<webmock>, [">= 0"])
+      s.add_development_dependency(%q<dotenv>, [">= 0"])
       s.add_development_dependency(%q<vcr>, [">= 0"])
       s.add_development_dependency(%q<redis>, [">= 0"])
     else
@@ -72,6 +70,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<guard>, [">= 0"])
       s.add_dependency(%q<guard-rspec>, [">= 0"])
       s.add_dependency(%q<webmock>, [">= 0"])
+      s.add_dependency(%q<dotenv>, [">= 0"])
       s.add_dependency(%q<vcr>, [">= 0"])
       s.add_dependency(%q<redis>, [">= 0"])
     end
@@ -86,6 +85,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<guard>, [">= 0"])
     s.add_dependency(%q<guard-rspec>, [">= 0"])
     s.add_dependency(%q<webmock>, [">= 0"])
+    s.add_dependency(%q<dotenv>, [">= 0"])
     s.add_dependency(%q<vcr>, [">= 0"])
     s.add_dependency(%q<redis>, [">= 0"])
   end

@@ -15,12 +15,12 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "capital-iq"
-  gem.homepage = "http://github.com/seeingidog/capital-iq"
+  gem.homepage = "http://github.com/exitround/capital-iq"
   gem.license = "MIT"
   gem.summary = %Q{Ruby wrapper for the CapIQ API}
   gem.description = %Q{Ruby wrapper for the CapIQ API}
-  gem.email = "ian@ruby-code.com"
-  gem.authors = ["Ian Morgan, Val Savvateev"]
+  gem.email = "dev@exitround.com"
+  gem.authors = ["Val Savvateev", "Greg Dean"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
