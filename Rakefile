@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %Q{Ruby wrapper for the CapIQ API}
   gem.description = %Q{Ruby wrapper for the CapIQ API}
   gem.email = "ian@ruby-code.com"
-  gem.authors = ["Ian Morgan"]
+  gem.authors = ["Ian Morgan, Val Savvateev"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

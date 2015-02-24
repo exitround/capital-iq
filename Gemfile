@@ -9,6 +9,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'webmock'
+  gem 'dotenv'
   gem 'vcr'
   gem 'redis'
 end

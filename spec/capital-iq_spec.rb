@@ -1,7 +1,10 @@
 require 'webmock/rspec'
 require 'vcr'
+require 'dotenv'
 
 require File.expand_path(File.dirname(__FILE__) + '/../lib/capital-iq.rb')
+
+Dotenv.load
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/vcr_cassettes'
@@ -19,9 +22,7 @@ describe "CapitalIq" do
     res = client.base_request([req1, req2])
 
     # Shortened form - no need to create request objects explicitly, although they do get created underneath:
-    VCR.use_cassette("02_IQ_COMPANY_ID_QUICK_MATCH") do
-      res = client.request_gdshe('microsoft', 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:1, endRank:20})
-    end
+    res = client.request_gdshe('microsoft', 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:1, endRank:20})
 
     # Returned values are accessed by identifier and mnemonic:
     res_val = res['microsoft']['IQ_COMPANY_ID_QUICK_MATCH']
