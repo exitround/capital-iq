@@ -34,7 +34,7 @@ You have an option of passing multiple requst objects into a call. They are all 
 
 === Convenience Methods - request_xxxxx
 
-You may choose to use the convenience methods provided by the `Client` class - `request_xxxxx`, where xxxxx - is the name of Capital IQ API function). They allow to forgo creating the request objects explicity, (the requsts objects do get created underneath though):
+You may choose to use the convenience methods provided by the +Client+ class - +request_xxxxx+, where xxxxx - is the name of Capital IQ API function). They allow to forgo creating the request objects explicity, (the requsts objects do get created underneath though):
 
   res = client.request_gdshe('microsoft', 'IQ_COMPANY_ID_QUICK_MATCH', {startRank:1, endRank:20})
 
@@ -42,11 +42,11 @@ The returned values are accessed by the identifier and the header name:
 
   res_val = res['microsoft']['IQ_COMPANY_ID_QUICK_MATCH']
 
-When using GDSHE or GDSHV functions, the result is represented by an array. Therefore `res_val` above is an array. We'll use `first` method to get the actual value:
+When using GDSHE or GDSHV functions, the result is represented by an array. Therefore +res_val+ above is an array. We'll use +first+ method to get the actual value:
 
   ms_id = res_val.first
 
-You can use the `scalar` method when querying on a single identifier, so the above example can be shortened to:
+You can use the +scalar+ method when querying on a single identifier, so the above example can be shortened to:
 
   ms_id = res.scalar['IQ_COMPANY_ID_QUICK_MATCH'].first
 
@@ -64,9 +64,9 @@ This call generates (2 identifiers times 3 mnemonics) = 6 requests (they're stil
 
   res = client.request_gdsp([ms_id, google_id], %w(IQ_COMPANY_WEBSITE IQ_COMPANY_NAME IQ_BUSINESS_DESCRIPTION))
 
-You can use the `to_hash` method to retrieve all values for a given identifier
+You can use the +to_hash+ method to retrieve all values for a given identifier
 
-  # All values for `ms_id`
+  # All values for +ms_id+
   ms_data = res[ms_id].to_hash
 
 Or you can retrieve all values for all identifiers:
