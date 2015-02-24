@@ -2,11 +2,16 @@
 
 Ruby API wrapper to Capital IQ API.
 
+== Compatibility Warning
+
+Breaking changes were introduced in versions following v0.0.7. This was necessary to provide support for new features such as multi-identifier/multi-mnemonic calls.
+
+v0.0.7 design is no longer maintained and can be found here: https://github.com/exitround/capital-iq/tree/v0.0.7
 
 == Installation
 
   gem install capital-iq
-  
+
 == Capital IQ API Basics
 
 Each request to Capital IQ API contains three required parameters: function, identifier, mnemonic, and one optional parameter: properties. The corresponding result will contain a rowset with "headers" and "rows". For single-value mnemonics the result would usually consist of a single header and a single row. The header name would usually match the name of the input mnemonic. Multi-value mnemonics, however, often contain additional headers (such as "change date" etc) and multiple rows.
