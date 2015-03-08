@@ -1,3 +1,4 @@
+require 'rspec'
 require 'webmock/rspec'
 require 'vcr'
 require 'dotenv'
@@ -46,5 +47,11 @@ describe "CapitalIq" do
     ms_data = res[ms_id].to_hash # all mnemonics for ms_id
     # Or you can retrieve all values for all identifiers
     google_data = res[google_id].to_hash # all mnemonics for google_id
+  end
+  it "raises ApiError when request is invalid" do
+    VCR.use_cassette("error") do
+      client = CapitalIQ::Client.new(ENV['CAPIQ_USER'], ENV['CAPIQ_PWD'])
+      expect {client.request_gdshe("no such id", "no such mnemonic")}.to raise_error(CapitalIQ::ApiError)
+    end
   end
 end
