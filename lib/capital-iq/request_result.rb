@@ -6,7 +6,7 @@ module CapitalIQ
     end
 
     def has_errors?(header=nil)
-      !self.ErrMsg.nil? && (header.nil? || header.in?(self.Headers))
+      (self.ErrMsg.to_s.strip != "") && (header.nil? || header.in?(self.Headers))
     end
 
     def [](header)
